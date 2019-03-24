@@ -49,6 +49,47 @@ class Usuario{
 
 		}
 	}
+	//pode ser um metodo statico por nao ter nenhum $this 
+	public static function getList(){
+
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM usuario ORDER BY login");
+
+	}
+
+	public static function search($login){
+
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM usuario WHERE login LIKE :search ORDER BY login",array(
+
+			":search"=>"%".$login."%"
+
+		));
+
+	}
+
+	public function login($login,$senha){
+
+		$sql = new Sql();
+
+		$resultado = $sql->select("SELECT * FROM usuario where login = :login AND senha = :senha ",array(
+			":login"=>$login,
+			":senha"=>$senha
+		));
+		if(count($resultado) > 0) {
+
+			$row = $resultado[0];
+
+			$this->setId($row['id']);
+			$this->setLogin($row['login']);
+			$this->setSenha($row['senha']);
+
+		}else{
+			throw new Exception("Login e/ou senha invalidos", 1);
+			
+		}
+
+	}
 
 	public function __toString(){
 
