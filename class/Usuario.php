@@ -41,11 +41,7 @@ class Usuario{
 		));
 		if(count($resultado) > 0) {
 
-			$row = $resultado[0];
-
-			$this->setId($row['id']);
-			$this->setLogin($row['login']);
-			$this->setSenha($row['senha']);
+			$this->setData($resultado[0]); 
 
 		}
 	}
@@ -78,17 +74,74 @@ class Usuario{
 		));
 		if(count($resultado) > 0) {
 
-			$row = $resultado[0];
+			$this->setData($resultado[0]); 
 
-			$this->setId($row['id']);
-			$this->setLogin($row['login']);
-			$this->setSenha($row['senha']);
-
+		
 		}else{
+
 			throw new Exception("Login e/ou senha invalidos", 1);
 			
 		}
 
+	}
+
+	public function setData($date){
+
+		$this->setId($date['id']);
+		$this->setLogin($date['login']);
+		$this->setSenha($date['senha']);
+
+
+	}
+
+	public function insert(){
+
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_usuarios_insert(:LOGIN, :SENHA)", array(
+			  ":LOGIN"=>$this->getLogin(),
+			  ":SENHA"=>$this->getSenha()
+
+		));
+
+		if (count($results) > 0){
+			$this->setData($results[0]); 
+		}
+
+	}
+
+	public function update($login, $senha){
+
+		$this->setLogin($login);
+		$this->setSenha($senha);
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE usuario SET login=:LOGIN, senha=:SENHA WHERE id=:ID", array(
+			  ":LOGIN"=>$this->getLogin(),
+			  ":SENHA"=>$this->getSenha(),
+			  ":ID"=>$this->getId()
+
+		));
+
+	}
+
+	public function delete(){
+		$sql = new Sql();
+
+		$results = $sql->query("DELETE FROM usuario WHERE id=:ID", array(
+			  ":ID"=>$this->getId()
+		));
+
+		$this->setId(0);
+		$this->setLogin("");
+		$this->setSenha("");
+	}
+
+	public function __construct($login = "", $senha = ""){
+
+		$this->setLogin($login);
+		$this->setSenha($senha);
 	}
 
 	public function __toString(){
@@ -101,8 +154,5 @@ class Usuario{
 
 	}
 }
-
-
-
 
 ?>

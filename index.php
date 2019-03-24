@@ -2,41 +2,39 @@
 
 require_once("config.php");
 
-/*$sql = new Sql();
+//CARREGA UM USUARIO PELO ID
+//$usuario = new Usuario();
+//$usuario->carregarPeloId(4);
+//echo $usuario;
 
-$usuarios = $sql->select("SELECT * FROM usuario");
+//FAZ UMA LISTA DE TODOS OS USUARIOS
+//$usuario = Usuario::getList();
+//echo json_encode($usuario);
 
-echo json_encode($usuarios);*/
+//FAZ UMA BUSCA DO USUARIO A PARTIR DO LOGIN USANDO LIKE
+//$search = Usuario::search("das");
+//echo json_encode($search);
 
-$usuario = new Usuario();
+//CARREGA UM USUARIO A PARTIR DO LOGIN E SENHA
+//$usuario = new Usuario();
+//$usuario->login("davi","hely");
+//echo $usuario;
 
-$usuario->carregarPeloId(4);
+//INSERE UM NOVO CAMPO A TABELA
+//$usuario = new Usuario("Mouse", "Teclado");
+//$usuario->insert();
+//echo $usuario;
 
-//ao dar o echo em um objeto e chamado o metodo to string
-echo $usuario;
+//FAZ O UPDATE DE UMA TABELA A PARTIR DO ID
+//$usuario = new Usuario();
+//$usuario->carregarPeloId(53);
+//$usuario->update("e","e");
+//echo $usuario;
 
-echo "---------------------<\br>";
-
-//chama o metodo getlist direto pois e um metodo static
-//chama o metodo para listar uma tabela inteira
-$lista = Usuario::getList();
-
-echo json_encode($lista);
-
-echo "---------------------<\br>";
-//chama o metodo para fazer uma busca
-$search = Usuario::search("das");
-
-echo json_encode($search);
-
-echo "---------------------<\br>";
-//carrega o usuario a partir do login e da senha
-$login = new Usuario();
-
-$login->login("davi","senha");
-
-echo $usuario;
-
-echo "---------------------<\br>";
+//FAZ O DELETE DE UM CAMPO
+//$usuario = new Usuario();
+//$usuario->carregarPeloId(53);
+//$usuario->delete();
+//echo $usuario;
 
 ?>
