@@ -1,4 +1,4 @@
-	<?php 
+<?php 
 
 class Usuario{
 
@@ -6,7 +6,7 @@ class Usuario{
 	private $login;
 	private $senha;
 
-	public function getId(){
+	public function getId{
 		return $this->id;
 	}
 
@@ -14,21 +14,21 @@ class Usuario{
 		$this->id = $value;	
 	}
 
-	public function getLogin(){
+	public function getLogin{
 		return $this->login;
 	}
 
 	public function setLogin($value){
-		$this->login = $value;	
+		$this->login = $login;	
 	}
 
 
-	public function getSenha(){
+	public function getSenha{
 		return $this->senha;
 	}
 
 	public function setSenha($value){
-		$this->senha = $value;	
+		$this->senha = $senha;	
 	}
 
 
@@ -36,12 +36,12 @@ class Usuario{
 
 		$sql = new Sql();
 
-		$resultado = $sql->select("SELECT * FROM usuario where id = :id",array(
-			":id"=>$id
+		$resultado = $sql->select("SELECT * FROM usuario where id = :ID",array(
+			":ID"=>$id
 		));
-		if(count($resultado) > 0) {
+		if(count($results) > 0) {
 
-			$row = $resultado[0];
+			$row = $results[0];
 
 			$this->setId($row['id']);
 			$this->setLogin($row['login']);
